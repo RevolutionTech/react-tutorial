@@ -7,6 +7,10 @@ ol, ul {
   padding-left: 30px;
 }
 
+ol > li.moveSelected {
+  background-color: #ff0;
+}
+
 .board-row:after {
   clear: both;
   content: "";
