@@ -47,9 +47,14 @@ class Game extends React.Component {
         selectedSquare: null,
         squares: Array(9).fill(null),
       }],
+      sortHistoryAsc: true,
       stepNumber: 0,
       xIsNext: true,
     };
+  }
+
+  sortHistory(sortAsc) {
+    this.setState({sortHistoryAsc: sortAsc});
   }
 
   handleClick(i) {
@@ -101,6 +106,7 @@ class Game extends React.Component {
         </li>
       )
     });
+    const sortedMoves = this.state.sortHistoryAsc ? moves : moves.slice().reverse();
 
     let status;
     if (winner) {
@@ -119,7 +125,14 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <ol>
+            <div>
+              <button onClick={() => this.sortHistory(!this.state.sortHistoryAsc)}>
+                {'Sort ' + (this.state.sortHistoryAsc ? 'descending' : 'ascending')}
+              </button>
+            </div>
+            {sortedMoves}
+          </ol>
         </div>
       </div>
     );
